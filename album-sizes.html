@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha o Tamanho do Álbum</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 80%;
+            height: 35%;
+        }
+
+        .album-sizes {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .album-sizes ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .album-sizes li {
+            background-color: #0c5c75;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 2px;
+            text-align: left;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 5px;
+            height: 10px;
+            min-width: 120px;
+        }
+
+        .album-sizes li.active,
+        .album-sizes li:hover {
+            background-color: #149eb5;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .album-preview img {
+            width: 600px;
+            height: 600px;
+            object-fit: contain;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="album-sizes">
+            <ul>
+                <li onclick="showAlbum('image13')">
+                    <span>15x15  |  Quadrado</span>
+                </li>
+                <li onclick="showAlbum('image12')">
+                    <span>15x20  | Vertical</span>
+                </li>
+                <li onclick="showAlbum('image11')">
+                    <span>20x15  | Horizontal</span>
+                </li>
+                <li onclick="showAlbum('image10')">
+                    <span>20x20  |  Quadrado</span>
+                </li>
+                <li onclick="showAlbum('image9')">
+                    <span>20x25  | Vertical</span>
+                </li>
+                <li onclick="showAlbum('image7')">
+                    <span>25x20  | Horizontal</span>
+                </li>
+                <li onclick="showAlbum('image8')">
+                    <span>20x30  | Vertical</span>
+                </li>
+                <li onclick="showAlbum('image5')">
+                    <span>25x30  | Vertical</span>
+                </li>
+                <li onclick="showAlbum('image6')">
+                    <span>25x25  |  Quadrado</span>
+                </li>
+                <li onclick="showAlbum('image4')">
+                    <span>30x20  | Vertical</span>
+                </li>
+                <li onclick="showAlbum('image3')">
+                    <span>30x25  | Horizontal</span>
+                </li>
+                <li onclick="showAlbum('image2')">
+                    <span>30x30  |  Quadrado</span>
+                </li>
+                <li onclick="showAlbum('image1')">
+                    <span>40x30  | Horizontal</span>
+                </li>
+            </ul>
+        </div>
+        <div class="album-preview">
+            <img id="album-image" src="https://via.placeholder.com/200x200" alt="Preview do Álbum">
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.album-sizes li');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                buttons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                const imageId = this.getAttribute('onclick').match(/'(.*?)'/)[1];
+                showAlbum(imageId);
+            });
+        });
+
+        function showAlbum(imageId) {
+            const imageElement = document.getElementById('album-image');
+            const images = {
+                'image1': 'https://images.tcdn.com.br/img/editor/up/655763/40x30.png',
+                'image2': 'https://images.tcdn.com.br/img/editor/up/655763/30x30.png',
+                'image3': 'https://images.tcdn.com.br/img/editor/up/655763/30x25.png',
+                'image4': 'https://images.tcdn.com.br/img/editor/up/655763/30x20.png',
+                'image5': 'https://images.tcdn.com.br/img/editor/up/655763/25x30.png',
+                'image6': 'https://images.tcdn.com.br/img/editor/up/655763/25x25.png',
+                'image7': 'https://images.tcdn.com.br/img/editor/up/655763/25x20.png',
+                'image8': 'https://images.tcdn.com.br/img/editor/up/655763/20x30.png',
+                'image9': 'https://images.tcdn.com.br/img/editor/up/655763/20x25.png',
+                'image10': 'https://images.tcdn.com.br/img/editor/up/655763/20x20.png',
+                'image11': 'https://images.tcdn.com.br/img/editor/up/655763/20x15.png',
+                'image12': 'https://images.tcdn.com.br/img/editor/up/655763/15x20.png',
+                'image13': 'https://images.tcdn.com.br/img/editor/up/655763/15x15.png'
+            };
+
+            imageElement.src = images[imageId];
+            imageElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
